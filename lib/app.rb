@@ -1,78 +1,80 @@
 require 'json'
 require 'date'
 
-def print_data(section,output) #6th level
+def print_data(section,out) #6th level
   if section == "product"
     $products_data.each do |p|
-      output.() << "Title: #{p[:product_title]}\n"
-    	output.() << "	Retail Price        : $#{p[:retail_price]}\n"
-    	output.() << "	Number of Purchases : #{p[:number_purch]} units\n"
-    	output.() << "	Total Sales         : $#{p[:total_sales]}\n"
-    	output.() << "	Average Sales Price : $#{p[:avg_sales_price]}\n"
-    	output.() << "	Average Discount    : $#{p[:avg_discount]}\n"
-    	output.() << "\n"
+      out.() << "Title: #{p[:product_title]}\n"
+    	out.() << "	Retail Price        : $#{p[:retail_price]}\n"
+    	out.() << "	Number of Purchases : #{p[:number_purch]} units\n"
+    	out.() << "	Total Sales         : $#{p[:total_sales]}\n"
+    	out.() << "	Average Sales Price : $#{p[:avg_sales_price]}\n"
+    	out.() << "	Average Discount    : $#{p[:avg_discount]}\n"
+    	out.() << "\n"
     end
   elsif section == "brand"
     $brands_data.each do |b|
-      output.() << "Name: #{b[:brandname]}\n"
-      output.() << "	Total stock        : #{b[:stock]} units\n"
-	    output.() << "	Average sell price : $#{b[:avg_price]}\n"
-	    output.() << "	Total Sales        : $#{b[:total_sales]}\n"
-	    output.() << "\n"
+      out.() << "Name: #{b[:brandname]}\n"
+      out.() << "	Total stock        : #{b[:stock]} units\n"
+	    out.() << "	Average sell price : $#{b[:avg_price]}\n"
+	    out.() << "	Total Sales        : $#{b[:total_sales]}\n"
+	    out.() << "\n"
     end
   end
 end
 
-def print_heading(section,output) #5th level
-  if section == "title"
+def print_heading(section,out,params = {}) #5th level
+  if section == "header"
     #ASCII art taken from http://patorjk.com/software/taag/#p=display&f=Ivrit&t=SALES%20REPORT%0A
-    output.() << " ____    _    _     _____ ____    ____  _____ ____   ___  ____ _____\n"
-    output.() << "/ ___|  / \\  | |   | ____/ ___|  |  _ \\| ____|  _ \\ / _ \\|  _ \\_   _|\n"
-    output.() << "\\___ \\ / _ \\ | |   |  _| \\___ \\  | |_) |  _| | |_) | | | | |_) || |\n"
-    output.() << " ___) / ___ \\| |___| |___ ___) | |  _ <| |___|  __/\| |_| |  _ < | |\n"
-    output.() << "|____/_/   \\_\\_____|_____|____/  |_| \\_\\_____|_|    \\___/|_| \\_\\|_|\n"
+    out.() << " ____    _    _     _____ ____    ____  _____ ____   ___  ____ _____\n"
+    out.() << "/ ___|  / \\  | |   | ____/ ___|  |  _ \\| ____|  _ \\ / _ \\|  _ \\_   _|\n"
+    out.() << "\\___ \\ / _ \\ | |   |  _| \\___ \\  | |_) |  _| | |_) | | | | |_) || |\n"
+    out.() << " ___) / ___ \\| |___| |___ ___) | |  _ <| |___|  __/\| |_| |  _ < | |\n"
+    out.() << "|____/_/   \\_\\_____|_____|____/  |_| \\_\\_____|_|    \\___/|_| \\_\\|_|\n"
 
   elsif section == "product"
-    output.() << "                     _            _       \n"
-    output.() << "                    | |          | |      \n"
-    output.() << " _ __  _ __ ___   __| |_   _  ___| |_ ___ \n"
-    output.() << "| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|\n"
-    output.() << "| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\\n"
-    output.() << "| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/\n"
-    output.() << "| |                                       \n"
-    output.() << "|_|                                       \n"
+    out.() << "                     _            _       \n"
+    out.() << "                    | |          | |      \n"
+    out.() << " _ __  _ __ ___   __| |_   _  ___| |_ ___ \n"
+    out.() << "| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|\n"
+    out.() << "| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\\n"
+    out.() << "| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/\n"
+    out.() << "| |                                       \n"
+    out.() << "|_|                                       \n"
 
   elsif section == "brand"
-    output.() << " _                         _     \n"
-    output.() << "| |                       | |    \n"
-    output.() << "| |__  _ __ __ _ _ __   __| |___ \n"
-    output.() << "| '_ \\| '__/ _` | '_ \\ / _` / __|\n"
-    output.() << "| |_) | | | (_| | | | | (_| \\__ \\\n"
-    output.() << "|_.__/|_|  \\__,_|_| |_|\\__,_|___/\n"
-
-  elsif section == "header"
-    #Need to add SALES REPORT HERE in ASCII
-    output.() << "Date of report: #{Date.today}\n"
+    out.() << " _                         _     \n"
+    out.() << "| |                       | |    \n"
+    out.() << "| |__  _ __ __ _ _ __   __| |___ \n"
+    out.() << "| '_ \\| '__/ _` | '_ \\ / _` / __|\n"
+    out.() << "| |_) | | | (_| | | | | (_| \\__ \\\n"
+    out.() << "|_.__/|_|  \\__,_|_| |_|\\__,_|___/\n"
   end
 
-  $report_file << "\n"
+  if params[:date]==true #added for the sake of the exercise
+    out.() << "Date of report: #{Date.today}\n"
+  end
+
+  out.() << "\n"
 end
 
-def make_section(section,heading_indent_num = 0,data_indent_num = 0) #4th level
-  #Creates the indenting based on the number passed as a parameter
-  @indent_heading = " " * heading_indent_num
-  @indent_data = " " * data_indent_num
+def build_output_string(indent_num)
+  @indent = " " * indent_num #Create an indentation based on the number passed
+  lambda { $report_file << @indent }
+end
 
+def make_section(section,heading_indent_num = 0,data_indent_num = 0,date = "N") #4th level
   #Generates the output format to reduce code clutter
-  @output = lambda { $report_file << @indent_heading }
-  print_heading(section,@output)
+  print_heading(section,build_output_string(heading_indent_num),date:(is_why?(date)))
+  print_data(section,build_output_string(data_indent_num))
+end
 
-  @output = lambda { $report_file << @indent_data }
-  print_data(section,@output)
+def is_why?(date) #added for the sake of the exercise
+  date == "Y"
 end
 
 def print_report #3rd level
-  make_section("title")
+  make_section("header",0,0,"Y")
   make_section("product",4,8)
   make_section("brand",4,8)
 end
