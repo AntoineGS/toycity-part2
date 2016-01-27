@@ -23,19 +23,6 @@ def print_data(section,output) #6th level
   end
 end
 
-def make_section(section,heading_indent_num,data_indent_num) #4th level
-  #Creates the indenting based on the number passed as a parameter
-  @indent_heading = " " * heading_indent_num
-  @indent_data = " " * data_indent_num
-
-  #Generates the output format to reduce code clutter
-  @output = lambda { $report_file << @indent_heading }
-  print_heading(section,@output)
-
-  @output = lambda { $report_file << @indent_data }
-  print_data(section,@output)
-end
-
 def print_heading(section,output) #5th level
   if section == "title"
     #ASCII art taken from http://patorjk.com/software/taag/#p=display&f=Ivrit&t=SALES%20REPORT%0A
@@ -71,8 +58,21 @@ def print_heading(section,output) #5th level
   $report_file << "\n"
 end
 
+def make_section(section,heading_indent_num = 0,data_indent_num = 0) #4th level
+  #Creates the indenting based on the number passed as a parameter
+  @indent_heading = " " * heading_indent_num
+  @indent_data = " " * data_indent_num
+
+  #Generates the output format to reduce code clutter
+  @output = lambda { $report_file << @indent_heading }
+  print_heading(section,@output)
+
+  @output = lambda { $report_file << @indent_data }
+  print_data(section,@output)
+end
+
 def print_report #3rd level
-  make_section("title",0,0)
+  make_section("title")
   make_section("product",4,8)
   make_section("brand",4,8)
 end
@@ -80,44 +80,43 @@ end
 def generate_data #3rd level
   $products_data = [] #will hold all the data for the products report
   $brands_data = [] #will hold all the data for the brands report
-  product_index = 0 #initialize the products index for the hash array to 0
+  @product_index = 0 #initialize the products index for the hash array to 0
 
   $products_hash["items"].each do |toy|
     $products_data.push(product_title: toy["title"], number_purch: toy["purchases"].count, retail_price: toy["full-price"],total_sales: 0, avg_sales_price: 0, avg_discount: 0) #Assumption is that products only appear once in the file, this creates a new product for each entry in toy
 
     #Brands calculations
-    brand_index = $brands_data.find_index{|x| x[:brandname] == toy["brand"]}
+    @brand_index = $brands_data.find_index{|x| x[:brandname] == toy["brand"]}
     #If it does not exist in the array, the index is null
   	#It is then added to the array
-  	if brand_index.nil?
+  	if @brand_index.nil?
   		$brands_data.push(brandname: toy["brand"], stock: toy["stock"], avg_price: toy["full-price"], total_sales: 0, toy_count: 1)
-  		brand_index = $brands_data.count - 1
+  		@brand_index = $brands_data.count - 1
   	else
   		#If it is there, then the stock of the current toy is added to existing total
-  		$brands_data[brand_index][:stock]+= toy["stock"]
-  		$brands_data[brand_index][:avg_price]= ((($brands_data[brand_index][:avg_price] * $brands_data[brand_index][:toy_count]).to_f + toy["full-price"].to_f) / ($brands_data[brand_index][:toy_count] + 1)).round(2)
-  		$brands_data[brand_index][:toy_count]+= 1
+  		$brands_data[@brand_index][:stock]+= toy["stock"]
+  		$brands_data[@brand_index][:avg_price]= ((($brands_data[@brand_index][:avg_price] * $brands_data[@brand_index][:toy_count]).to_f + toy["full-price"].to_f) / ($brands_data[@brand_index][:toy_count] + 1)).round(2)
+  		$brands_data[@brand_index][:toy_count]+= 1
   	end
 
   	toy["purchases"].each do |purch|
       #product calculations
-      $products_data[product_index][:total_sales]+=purch["price"]
+      $products_data[@product_index][:total_sales]+=purch["price"]
 
       #brand calculations
       #Could not figure out how to use += with .round(2) in this scenario. It seems the 0 from the initialization is not exactly 0
-      $brands_data[brand_index][:total_sales] = ($brands_data[brand_index][:total_sales] + purch["price"].to_f).round(2)
+      $brands_data[@brand_index][:total_sales] = ($brands_data[@brand_index][:total_sales] + purch["price"].to_f).round(2)
     end
 
-  	$products_data[product_index][:avg_sales_price] = $products_data[product_index][:total_sales] / toy["purchases"].count
-    $products_data[product_index][:avg_discount] = $products_data[product_index][:retail_price].to_f - $products_data[product_index][:avg_sales_price].to_f
+  	$products_data[@product_index][:avg_sales_price] = $products_data[@product_index][:total_sales] / toy["purchases"].count
+    $products_data[@product_index][:avg_discount] = $products_data[@product_index][:retail_price].to_f - $products_data[@product_index][:avg_sales_price].to_f
 
-    product_index += 1
+    @product_index += 1
   end
 end
 
 def create_report #2nd level
   generate_data
-  #print_heading("header")
   print_report
 end
 
