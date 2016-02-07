@@ -1,0 +1,23 @@
+commit ef345a58e74246ca55f6c5b0584efc45e2c6a05b
+Author: AntoineGS <antoineg.simard@gmail.com>
+Date:   Tue Jan 26 22:44:37 2016 -0500
+
+    Code cleanup, addition of new methods for project requirements
+
+commit 982100c7e3491a3644cd36674808cf22d2f096ca
+Author: AntoineGS <antoineg.simard@gmail.com>
+Date:   Tue Jan 26 22:09:51 2016 -0500
+
+    Code cleanup, addition of new method to reduce text clutter
+
+commit b6ff7bcd5910e64a0ee95b5c25eff7ce8e9a29a3
+Author: AntoineGS <antoineg.simard@gmail.com>
+Date:   Tue Jan 26 22:08:56 2016 -0500
+
+    First working draft
+
+commit b45f8082ef35b356c1f0b625b7199ae92c7f6a7d
+Author: AntoineGS <antoineg.simard@gmail.com>
+Date:   Sun Jan 24 12:08:31 2016 -0500
+
+    Initial Commit

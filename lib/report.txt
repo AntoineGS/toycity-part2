@@ -1,0 +1,54 @@
+ ____    _    _     _____ ____    ____  _____ ____   ___  ____ _____
+/ ___|  / \  | |   | ____/ ___|  |  _ \| ____|  _ \ / _ \|  _ \_   _|
+\___ \ / _ \ | |   |  _| \___ \  | |_) |  _| | |_) | | | | |_) || |
+ ___) / ___ \| |___| |___ ___) | |  _ <| |___|  __/| |_| |  _ < | |
+|____/_/   \_\_____|_____|____/  |_| \_\_____|_|    \___/|_| \_\|_|
+Date of report: 2016-01-26
+
+                         _            _       
+                        | |          | |      
+     _ __  _ __ ___   __| |_   _  ___| |_ ___ 
+    | '_ \| '__/ _ \ / _` | | | |/ __| __/ __|
+    | |_) | | | (_) | (_| | |_| | (__| |_\__ \
+    | .__/|_|  \___/ \__,_|\__,_|\___|\__|___/
+    | |                                       
+    |_|                                       
+    
+        Title: LEGO Iron Man vs. Ultron
+        	Retail Price        : $22.99
+        	Number of Purchases : 2 units
+        	Total Sales         : $36.98
+        	Average Sales Price : $18.49
+        	Average Discount    : $4.5
+        
+        Title: Nano Block Empire State Building
+        	Retail Price        : $49.99
+        	Number of Purchases : 2 units
+        	Total Sales         : $68.98
+        	Average Sales Price : $34.49
+        	Average Discount    : $15.5
+        
+        Title: LEGO Firehouse Headquarters
+        	Retail Price        : $199.99
+        	Number of Purchases : 2 units
+        	Total Sales         : $379.98
+        	Average Sales Price : $189.99
+        	Average Discount    : $10.0
+        
+     _                         _     
+    | |                       | |    
+    | |__  _ __ __ _ _ __   __| |___ 
+    | '_ \| '__/ _` | '_ \ / _` / __|
+    | |_) | | | (_| | | | | (_| \__ \
+    |_.__/|_|  \__,_|_| |_|\__,_|___/
+    
+        Name: LEGO
+        	Total stock        : 55 units
+        	Average sell price : $111.49
+        	Total Sales        : $416.96
+        
+        Name: Nano Blocks
+        	Total stock        : 12 units
+        	Average sell price : $49.99
+        	Total Sales        : $68.98
+        
